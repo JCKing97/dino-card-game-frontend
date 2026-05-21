@@ -4,10 +4,13 @@
 
 /* Custom Global Styles */
 :root {
+  --nhm-purple: #290340;
+  --nhm-hover-purple: #3e1c53;
+  --nhm-lime-green: #c9f708;
   --nhm-blue: #003d7a;
   --nhm-light-blue: #00a1de;
   --nhm-text: #333;
-  --nhm-background: #f5f5f5;
+  --nhm-background: #fff;
 }
 
 * {
@@ -26,17 +29,17 @@ body {
 /* Base Button Style */
 .btn {
   display: inline-block;
-  background-color: var(--nhm-light-blue);
-  color: #fff;
+  background-color: var(--nhm-purple);
   padding: 12px 25px;
-  text-decoration: none;
-  border-radius: 4px;
+  text-decoration-color: var(--nhm-lime-green);
+  border-color: var(--nhm-lime-green);
+  border-radius: 24px;
   font-weight: bold;
   transition: background-color 0.3s;
 }
 
 .btn:hover {
-  background-color: #0077b6;
+  background-color: var(--nhm-hover-purple);
 }
 
 /* Responsive Design */

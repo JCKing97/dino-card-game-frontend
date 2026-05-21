@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 export default function Header() {
   return (
     <header className={styles.header}>
-      <div className={styles['header-top']}>
+      {/* <div className={styles['header-top']}>
         <div className={styles.container}>
           <span>Welcome to the Natural History Museum</span>
           <div>
@@ -12,13 +12,13 @@ export default function Header() {
             <Link href="#" className={styles.link}>Help</Link>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={styles['header-main']}>
         <div className={styles.container}>
           <div className={styles.logo}>
             <img
               src="https://www.nhm.ac.uk/content/dam/nhmwww/about-us/logo-nhm.svg"
-              alt="Natural History Museum Logo"
+              alt="Natural History Museum"
               width={150}
             />
           </div>
