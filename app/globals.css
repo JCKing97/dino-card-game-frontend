@@ -12,6 +12,7 @@
   --nhm-light-blue: #00a1de;
   --nhm-text: #333;
   --nhm-background: #f3f3f3;
+  --nhm-hover-background: #a8a8a8;
 }
 
 * {
@@ -34,8 +35,7 @@ body {
   padding: 12px 25px;
   color: var(--nhm-lime-green);
   text-decoration: none;
-  border-color: var(--nhm-lime-green);
-  border-width: medium;
+  border: 4px solid var(--nhm-lime-green);
   border-radius: 24px;
   font-weight: bold;
   transition: background-color 0.3s;
@@ -43,23 +43,6 @@ body {
 
 .btn:hover {
   background-color: var(--nhm-hover-purple);
-}
-
-.btn-color-invert {
-  display: inline-block;
-  background-color: var(--nhm-lime-green);
-  padding: 12px 25px;
-  color: var(--nhm-purple);
-  text-decoration: none;
-  border-color: var(--nhm-lime-green);
-  border-width: medium;
-  border-radius: 24px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.btn-color-invert:hover {
-  background-color: var(--nhm-hover-lime-green);
 }
 
 /* Responsive Design */

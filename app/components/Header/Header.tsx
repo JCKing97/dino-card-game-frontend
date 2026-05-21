@@ -7,7 +7,7 @@ export default function Header() {
       <div className={styles['header-main']}>
         <div className={styles.container}>
           <div className={styles.logo}>
-            <Link href="/" className={styles.homelink}>Natural History Museum</Link>
+            <Link href="/" className={styles.link}>Natural History Museum</Link>
           </div>
           <nav className={styles['header-nav']}>
             <Link href="#" className={styles.link}>Visit</Link>
