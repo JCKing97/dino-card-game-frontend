@@ -1,0 +1,33 @@
+name: Deploy Dino Card Game to ACR and ACI
+
+on:
+  push:
+    branches: [ main ]  # Trigger on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.ACR_PASSWORD }}" | docker login ${{ secrets.ACR_NAME }}.azurecr.io -u ${{ secrets.ACR_USERNAME }} --password-stdin
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/dino-card-game:v1 .
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/dino-card-game:v1
+
+      - name: Deploy to Azure Container Instances (ACI)
+        run: |
+          az container create \
+            --resource-group ${{ secrets.AZURE_RG }} \
+            --name dino-card-game \
+            --image ${{ secrets.ACR_NAME }}.azurecr.io/dino-card-game:v1 \
+            --cpu 1 \
+            --memory 1 \
+            --ports 3000 \
+            --dns-name-label dino-card-game \
+            --registry-username ${{ secrets.ACR_USERNAME }} \
+            --registry-password ${{ secrets.ACR_PASSWORD }}
