@@ -1,8 +1,16 @@
 "use client";
+
 import Link from 'next/link';
+import { useState } from 'react';
 import styles from './Header.module.css';
 
 export default function Header() {
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles['header-main']}>
