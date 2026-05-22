@@ -18,7 +18,7 @@
 
 .game-board-controls-buttons {
   display: inline-grid;
-  grid-template-columns: 100px 100px;
+  grid-template-columns: 200px 200px;
   grid-gap: 20px;
 }
 
@@ -29,8 +29,12 @@
 }
 
 .gameboard {
+  text-align: center;
+}
+
+.gameboard-cards-container {
   display: inline-grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 400px 400px;
   grid-gap: 20px;
 }
 

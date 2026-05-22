@@ -20,8 +20,6 @@ export default function Header() {
           </div>
           <nav className={styles['header-nav']}>
             <Link href="#" className={styles.link}>Explore</Link>
-            <Link href="#" className={styles.link}>What's on</Link>
-            <Link href="#" className={styles.link}>Support us</Link>
             <Link href="#" className={styles.link}>Shop</Link>
             <div className={styles['dropdown-container']}>
               <Link href="#" className={styles.link} onClick={(e) => { e.preventDefault(); toggleDropdown(); }}>Games&#x2335;</Link>

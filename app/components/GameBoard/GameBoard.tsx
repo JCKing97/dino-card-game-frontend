@@ -19,10 +19,12 @@ export default function GameBoard() {
         </div>
         <div className={styles.gameboard}>
             <div className={styles['game-board-card-container']}>
-                <GameCard title="Tyrannosaurus Rex" description="Monstrous carnivore!" />
-            </div>
-            <div className={styles['game-board-card-container']}>
-                <GameCard title="Diplodocus" description="Giant herbivore!" />
+                <div className={styles['game-board-card-container']}>
+                    <GameCard title="Tyrannosaurus Rex" description="Monstrous carnivore!" />
+                </div>
+                <div className={styles['game-board-card-container']}>
+                    <GameCard title="Diplodocus" description="Giant herbivore!" />
+                </div>
             </div>
         </div>
     </div>
