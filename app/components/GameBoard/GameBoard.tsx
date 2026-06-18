@@ -22,14 +22,15 @@ export default function GameBoard() {
     e.preventDefault();
     const msg = cardsEqual(cards.left, cards.right) ? "Missed a snap!" : "Well skipped!"; 
     setGameboard({ gameboard: getNewGameboardWithMessage(msg) });
+    setTimeout(() => handleRefreshCards(), 3000);
   };
   const handleSnap = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const msg = cardsEqual(cards.left, cards.right) ? "Snap!" : "Those didn't match!"; 
     setGameboard({ gameboard: getNewGameboardWithMessage(msg) });
+    setTimeout(() => handleRefreshCards(), 3000);
   };
-  const handleRefreshCards = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+  const handleRefreshCards = () => {
     const cardLeft = getRandomCard();
     const cardRight = getRandomCard();
     setCards({ left: cardLeft, right: cardRight });
@@ -47,9 +48,6 @@ export default function GameBoard() {
                 </div>
                 <div className={styles['game-board-controls-button']}>
                     <Link href="#" className="btn" onClick={handleSnap}>Snap!</Link>
-                </div>
-                <div className={styles['game-board-controls-button']}>
-                    <Link href="#" className="btn" onClick={handleRefreshCards}>Next!</Link>
                 </div>
             </div>
         </div>
