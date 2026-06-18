@@ -9,32 +9,59 @@ import { GameCardProps, getRandomCard, cardsEqual } from "../../lib/card-utils";
 export default function GameBoard() {
 
   // State to hold the current cards
+  const [countDown, setCountDown] = useState(0);
+  const [msg, setMsg] = useState("");
   const [cards, setCards] = useState({
     left: getRandomCard(),
     right: getRandomCard(),
   });
   const [gameboard, setGameboard] = useState({
-    gameboard: getNewGameboardWithCards(cards.left, cards.right)
+    board: getNewGameboardWithCards(cards.left, cards.right)
+  });
+  const [msgboard, setMsgboard] = useState({
+    board: getNewGameboardWithMessage(msg, countDown)
   });
 
-  // Function to refresh the cards
+  // Functions to refresh the cards
   const handleSkip = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const msg = cardsEqual(cards.left, cards.right) ? "Missed a snap!" : "Well skipped!"; 
-    setGameboard({ gameboard: getNewGameboardWithMessage(msg) });
-    setTimeout(() => handleRefreshCards(), 3000);
+    if (countDown > 0)
+      return
+    const msg = cardsEqual(cards.left, cards.right) ? "Missed a snap!" : "Well skipped!";
+    setCountDown(3);
+    setMsg(msg);
+    setMsgboard({ board: getNewGameboardWithMessage(msg, 3) });
+    startCountdown(msg);
   };
   const handleSnap = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const msg = cardsEqual(cards.left, cards.right) ? "Snap!" : "Those didn't match!"; 
-    setGameboard({ gameboard: getNewGameboardWithMessage(msg) });
-    setTimeout(() => handleRefreshCards(), 3000);
+    if (countDown > 0)
+      return
+    const msg = cardsEqual(cards.left, cards.right) ? "Snap!" : "Those didn't match!";
+    setCountDown(3);
+    setMsg(msg);
+    setMsgboard({ board: getNewGameboardWithMessage(msg, 3) });
+    startCountdown(msg);
   };
-  const handleRefreshCards = () => {
+  const doRefreshCards = () => {
     const cardLeft = getRandomCard();
     const cardRight = getRandomCard();
     setCards({ left: cardLeft, right: cardRight });
-    setGameboard( { gameboard: getNewGameboardWithCards(cardLeft, cardRight) });
+    setGameboard( { board: getNewGameboardWithCards(cardLeft, cardRight) });
+  };
+  // Start a timer to update the countdown every second
+  const startCountdown = (msg: String) => {
+    const timer = setInterval(() => {
+      setCountDown((prevCountdown) => {
+        if (prevCountdown <= 1) {
+          clearInterval(timer);
+          doRefreshCards();
+          return 0;
+        }
+        setMsgboard({ board: getNewGameboardWithMessage(msg, prevCountdown - 1) });
+        return prevCountdown - 1;
+      });
+    }, 1000);
   };
 
   return (
@@ -52,7 +79,8 @@ export default function GameBoard() {
             </div>
         </div>
         <div className={styles.gameboard}>
-            {gameboard.gameboard}
+          {countDown > 0 && ( msgboard.board )}
+          {countDown <= 0 && ( gameboard.board )}
         </div>
     </div>
   );
@@ -71,12 +99,13 @@ function getNewGameboardWithCards(cardLeft: GameCardProps, cardRight: GameCardPr
   );
 }
 
-function getNewGameboardWithMessage(msg: String): React.ReactNode {
+function getNewGameboardWithMessage(msg: String, countDown: number): React.ReactNode {
   return (
     <div className={styles['game-board-msg-container']}>
       <div className={styles['game-board-msg-container-container']}>
         <div className={styles['game-board-msg']}>
-          <p>{msg}</p>
+          <p>{msg}</p>  
+          <p>{countDown}</p>
         </div>
       </div>
     </div>
